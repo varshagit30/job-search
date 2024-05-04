@@ -1,11 +1,11 @@
 import {
-  FETCH_DATA_REQUEST,
+  // FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
 } from "../Actions/Actions";
 
 const initialState = {
-  data: null,
+  data: [],
   loading: false,
   error: null,
 };

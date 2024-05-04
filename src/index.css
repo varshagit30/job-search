@@ -47,7 +47,7 @@ img, svg {
  width: 100%;
 }
 
-.card-info-container >h3{
+.card-info-container >a{
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 1px;

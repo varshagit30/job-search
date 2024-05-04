@@ -9,16 +9,16 @@ import { fetchData } from "./store/Actions/Actions";
 function CardList({ fetchData, data, state, loading, error }) {
   useEffect(() => {
     fetchData(); // Fetch data when the component mounts
-    console.log("fetch", data);
   }, [fetchData]);
 
+  console.log("fetch data", data);
   return (
     <Container>
       <SearchFilter />
-      <Grid container spacing={2} className="Grid">
-        <Grid>
-          <Cards data={data} />
-        </Grid>
+      <Grid container spacing={3} className="Grid">
+        {/* <Grid> */}
+        <Cards data={data} />
+        {/* </Grid> */}
       </Grid>
     </Container>
   );
