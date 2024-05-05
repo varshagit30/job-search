@@ -13,17 +13,6 @@ img, svg {
   height: 17px !important;
 }
 
-.card-button{
-  background-color: rgb(85, 239, 196) !important;
-  width: 100% !important;
-  color: rgb(0, 0, 0) !important;
-  font-weight: 700 !important;
-  padding: 6px 18px !important;
-  border-color:  rgb(85, 239, 196) ;
-  border-radius: 8px !important;
-  text-transform: none !important;
-  margin-right: 5px 0 !important;
-}
 
 .card{
   width: 20rem;
@@ -35,6 +24,17 @@ img, svg {
   background-color: white;
   height: fit-content;
   padding: 8px ;
+}
+
+.card-button{
+  background-color: rgb(85, 239, 196) !important;
+  width: 100% !important;
+  color: rgb(0, 0, 0) !important;
+  font-weight: 700 !important;
+  padding: 6px 18px !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  /* margin-top: 5px 0 !important; */
 }
 
 .card-post{

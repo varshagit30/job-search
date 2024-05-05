@@ -13,131 +13,118 @@ import {
 } from "@mui/material";
 import SearchFilter from "./SearchFilter";
 
-const Cards = ({ data }) => {
+const Cards = ({
+  data,
+  setFilter,
+  clearFilter,
+  filter,
+  filteredData,
+  handleFilterChange,
+  handleClearFilter,
+}) => {
   console.log("cards data", data.jdList);
-  // const [filteredData, setFilteredData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // const handleFilter = (e) => {
-  //   const getSearch = e.target.value;
-  //   if (getSearch === "") {
-  //     setFilteredData(data);
-  //   } else {
-  //     const updData = data.jdList.filter((item) =>
-  //       item.companyName.toLowerCase().includes(getSearch)
-  //     );
-  //     setFilteredData(updData);
-  //     console.log("updData", getSearch);
-  //   }
-  // };
-  // const jsonData = JSON.stringify(data.jdList);
-  // console.log("jsonData", jsonData);
   const newData = data.jdList;
   const minExpItems = [...new Set(newData && newData.map((val) => val.minExp))];
+  console.log("filteredData", filteredData);
 
   return (
     <>
       <SearchFilter
         data={data}
-        setSearchTerm={setSearchTerm}
-        searchTerm={searchTerm}
+        filter={filter}
         newData={newData}
+        setFilter={setFilter}
+        clearFilter={clearFilter}
+        handleFilterChange={handleFilterChange}
+        handleClearFilter={handleClearFilter}
       />
-
-      {data.jdList &&
-        data.jdList
-          .filter((val, index) => {
-            if (searchTerm === "") {
-              return val;
-            } else if (
-              val.companyName
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase()) ||
-              val.location.toLowerCase().includes(searchTerm.toLowerCase())
-            ) {
-              return val;
-            }
-          })
-          .map((items, index) => {
-            return (
-              <>
-                <Grid xs={4}>
-                  <Card className="card" key={items.jdUid}>
-                    <Box className="card-post">⏳Posted 4 days ago</Box>
-                    <CardHeader
-                      avatar={
-                        <CardMedia
-                          image={items.logoUrl}
-                          className="card-logo"
-                        />
-                      }
-                      title={
-                        <>
-                          <a className="company-name" href={items.jdLink}>
-                            {" "}
-                            {items.companyName}
-                          </a>
-                        </>
-                      }
-                      subheader={
-                        <>
-                          {items.jobRole}
-                          <br />
-                          {items.location}
-                        </>
-                      }
-                    />
-                    <CardContent>
+      {filteredData &&
+        filteredData.map((card, index) => {
+          return (
+            <>
+              <Grid xs={4}>
+                <Card className="card">
+                  <Box className="card-post">⏳Posted 4 days ago</Box>
+                  <CardHeader
+                    avatar={
+                      <CardMedia image={card.logoUrl} className="card-logo" />
+                    }
+                    title={
+                      <>
+                        <a className="company-name" href={card.jdLink}>
+                          {" "}
+                          {card.companyName}
+                        </a>
+                      </>
+                    }
+                    subheader={
+                      <>
+                        {card.jobRole}
+                        <br />
+                        {card.location}
+                      </>
+                    }
+                  />
+                  <CardContent>
+                    {card.minJdSalary && card.maxJdSalary != null ? (
                       <Typography className="card-salary">
-                        Estimated Salary: {items.minJdSalary} -
-                        {items.maxJdSalary} {items.salaryCurrencyCode} ✅
+                        Estimated Salary: {card.minJdSalary} -{card.maxJdSalary}{" "}
+                        {card.salaryCurrencyCode} ✅
                       </Typography>
-                      <br />
-                      <Typography className="about-company">
-                        About Company:
-                      </Typography>
-                      <Typography className="about-us">About us</Typography>
-                      <Typography
-                        className={isOpen ? "experience" : "job-details"}
-                      >
-                        {items.jobDetailsFromCompany}
-                      </Typography>
-                      <Button
-                        id={index}
-                        className="read-more"
-                        onClick={(event) => {
-                          if (event.target.id) {
-                            setIsOpen(!isOpen);
-                          }
-                          // console.log("target", event.target.id, index);
-                        }}
-                      >
-                        {isOpen ? "Read Less" : " View Job"}
-                      </Button>
-                      <br />
-                      <Typography className="card-salary">
-                        Minimun experience
-                      </Typography>
-                      <Typography className="experience">
-                        {items.minExp} years
-                      </Typography>
-                      <br />
-                      <Link
-                        component="button"
-                        className="card-button"
-                        underline="none"
-                        href={items.jdLink}
-                      >
-                        <Button href={items.jdLink}>⚡ Easy Apply</Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              </>
-            );
-          })}
+                    ) : (
+                      ""
+                    )}
+                    <br />
+                    <Typography className="about-company">
+                      About Company:
+                    </Typography>
+                    <Typography className="about-us">About us</Typography>
+                    <Typography
+                      className={isOpen ? "experience" : "job-details"}
+                    >
+                      {card.jobDetailsFromCompany}
+                    </Typography>
+                    <Button
+                      className="read-more"
+                      onClick={(event) => {
+                        if (event.target.id) {
+                          setIsOpen(!isOpen);
+                        }
+                        // console.log("target", event.target.id, index);
+                      }}
+                    >
+                      {isOpen ? "Read Less" : " View Job"}
+                    </Button>
+                    <br />
+                    {card.minExp != null ? (
+                      <>
+                        <Typography className="card-salary">
+                          Minimun experience
+                        </Typography>
+                        <Typography className="experience">
+                          {card.minExp} years
+                        </Typography>
+                      </>
+                    ) : (
+                      " "
+                    )}
+                    <br />
+                    <Link
+                      component="button"
+                      className="card-button"
+                      underline="none"
+                      href={card.jdLink}
+                    >
+                      <Button href={card.jdLink}>⚡ Easy Apply</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </>
+          );
+        })}
     </>
   );
 };

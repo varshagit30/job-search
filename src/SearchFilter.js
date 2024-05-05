@@ -38,7 +38,13 @@ const getStyles = (name, personName, theme) => {
 };
 const names = ["Oliver Hansen", "Van Henry", "April Tucker", "Ralph Hubbard"];
 
-function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
+function SearchFilter({
+  data,
+  filter,
+  newData,
+  handleFilterChange,
+  handleClearFilter,
+}) {
   const theme = useTheme();
 
   const menuItems = [...new Set(newData && newData.map((val) => val.location))];
@@ -51,11 +57,10 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setPersonName(typeof value === "string" ? value.split(",") : value);
   };
+
+  console.log("filter", filter);
 
   return (
     <div>
@@ -69,7 +74,7 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           label="Roles"
           id="roleId"
           multiple
-          // value={searchTerm}
+          // value={filter}
           endAdornment={
             <IconButton>
               <ClearIcon
@@ -111,16 +116,11 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           labelId="location"
           id="locationId"
           label="Location"
-          value={searchTerm}
-          onChange={(event) => {
-            setSearchTerm(event.target.value);
-          }}
+          value={filter}
+          onChange={handleFilterChange}
           endAdornment={
             <IconButton>
-              <ClearIcon
-                className="clear-icon"
-                onClick={() => setSearchTerm("")}
-              />
+              <ClearIcon className="clear-icon" onClick={handleClearFilter} />
             </IconButton>
           }
         >
@@ -136,22 +136,22 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           labelId="experience"
           id="experienceId"
           label="Experience"
-          value={searchTerm}
-          onChange={(event) => {
-            setSearchTerm(event.target.value);
-          }}
+          value={filter}
+          onChange={handleFilterChange}
           endAdornment={
             <IconButton>
-              <ClearIcon
-                className="clear-icon"
-                onClick={() => setSearchTerm("")}
-              />
+              <ClearIcon className="clear-icon" onClick={handleClearFilter} />
             </IconButton>
           }
         >
           <MenuItem value="1">1</MenuItem>
           <MenuItem value="2">2</MenuItem>
           <MenuItem value="3">3</MenuItem>
+          <MenuItem value="4">4</MenuItem>
+          <MenuItem value="5">5</MenuItem>
+          <MenuItem value="6">6</MenuItem>
+          <MenuItem value="7">7</MenuItem>
+          <MenuItem value="8">8</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ m: 2, width: 200 }} size="small">
@@ -162,16 +162,11 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           labelId="remote"
           id="remoteId"
           label="Remote"
-          value={searchTerm}
-          onChange={(event) => {
-            setSearchTerm(event.target.value);
-          }}
+          value={filter}
+          onChange={handleFilterChange}
           endAdornment={
             <IconButton>
-              <ClearIcon
-                className="clear-icon"
-                onClick={() => setSearchTerm("")}
-              />
+              <ClearIcon className="clear-icon" onClick={handleClearFilter} />
             </IconButton>
           }
         >
@@ -188,23 +183,14 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           labelId="basePay"
           id="basePayId"
           label="Minimum Base Pay Salary"
-          value={searchTerm}
-          onChange={(event) => {
-            setSearchTerm(event.target.value);
-          }}
+          value={filter}
+          onChange={handleFilterChange}
           endAdornment={
             <IconButton>
-              <ClearIcon
-                className="clear-icon"
-                onClick={() => setSearchTerm("")}
-              />
+              <ClearIcon className="clear-icon" onClick={handleClearFilter} />
             </IconButton>
           }
         >
-          {/* {basePayItems &&
-            basePayItems.map((name) => (
-              <MenuItem value={name}>{name} USD</MenuItem>
-            ))} */}
           <MenuItem value="0">0L</MenuItem>
           <MenuItem value="10">10L</MenuItem>
           <MenuItem value="20">20L</MenuItem>
@@ -218,9 +204,7 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           size="small"
           className="search-company"
           placeholder="Search Company Name"
-          onChange={(event) => {
-            setSearchTerm(event.target.value);
-          }}
+          onChange={handleFilterChange}
         ></TextField>
       </FormControl>
     </div>
