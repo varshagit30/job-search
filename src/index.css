@@ -7,6 +7,12 @@ img, svg {
   display: block;
 }
 
+.clear-icon{
+  color: rgb(204, 204, 204);
+  padding-right: 5px;
+  height: 17px !important;
+}
+
 .card-button{
   background-color: rgb(85, 239, 196) !important;
   width: 100% !important;
@@ -20,27 +26,23 @@ img, svg {
 }
 
 .card{
-  display: flex;
-  flex-flow: wrap;
   width: 20rem;
   border-radius: 2rem !important;
   box-shadow: 0px 10px 8px #999;
-  flex-direction: column;
-  /* margin: 0.5rem; */
   margin-left: auto;
   margin-right: auto;
-  margin-top: 8px;
+  margin-top: 20px;
   background-color: white;
   height: fit-content;
-  padding: 8px 16px;
+  padding: 8px ;
 }
 
 .card-post{
   width: max-content;
   padding: 4px 6px;
   border-radius: 10px !important;
-  border: 1px solid;
-  border-color: #a19f9f;
+  border: 1px solid rgb(230, 230, 230);
+  box-shadow: rgba(6, 6, 6, 0.05) 0px 2px 6px 0px;
   margin: 10px;
   font-weight: 400;
   line-height: 1.5;
@@ -57,25 +59,26 @@ img, svg {
  width: 100%;
 } */
 
-/* .card-info-container >a{
+.company-name{
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 3px;
   color: #8b8b8b;
+  text-decoration: none;
 }
 
-.card-info-container >h2 {
+/* .card-info-container >h2 {
   font-size: 14px;
   line-height: 1.5;
   justify-content: left;
 } */
 
- .card-subtext {
+ /* .card-subtext {
   font-size: 11px;
   font-weight: 500;
   margin-top: 5px;
-}
+} */
 
 .card-salary{
   font-size: 14px !important;
@@ -94,15 +97,37 @@ img, svg {
   font-weight: bold !important;
 }
 
+.read-more{
+  text-decoration: none !important;
+  font-size: 12px !important;
+}
+
 .job-details{
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+}
+
+ .experience{
   font-size: 14px !important;
   line-height: 1.5 !important;
 }
 
- .experience{
-  margin-top: 10px;
-  display: block;
-
+.filter-title{
+  font-size: 13px !important;
 }
- 
+
+.select-role{
+  height: 36px !important;
+}
+
+.search-company{
+  font-size: 13px !important;
+  height: 36px !important;  
+}
+
+
         

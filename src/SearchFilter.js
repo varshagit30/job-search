@@ -59,13 +59,25 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 120 }} size="small">
-        <InputLabel id="roles">Roles</InputLabel>
+      <FormControl sx={{ m: 2, width: 200 }} size="small">
+        <InputLabel className="filter-title" id="roles">
+          Roles
+        </InputLabel>
         <Select
+          className="select-role"
           labelId="roles"
           label="Roles"
           id="roleId"
           multiple
+          // value={searchTerm}
+          endAdornment={
+            <IconButton>
+              <ClearIcon
+                className="clear-icon"
+                onClick={() => setPersonName("")}
+              />
+            </IconButton>
+          }
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Roles" />}
@@ -90,9 +102,12 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
             ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
-        <InputLabel id="location">Location</InputLabel>
+      <FormControl sx={{ m: 2, width: 200 }} size="small">
+        <InputLabel className="filter-title" id="location">
+          Location
+        </InputLabel>
         <Select
+          className="select-role"
           labelId="location"
           id="locationId"
           label="Location"
@@ -102,7 +117,10 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           }}
           endAdornment={
             <IconButton>
-              <ClearIcon onClick={() => setSearchTerm("")} />
+              <ClearIcon
+                className="clear-icon"
+                onClick={() => setSearchTerm("")}
+              />
             </IconButton>
           }
         >
@@ -110,8 +128,10 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
             menuItems.map((name) => <MenuItem value={name}>{name}</MenuItem>)}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
-        <InputLabel id="experience">Min Experience</InputLabel>
+      <FormControl sx={{ m: 2, width: 200 }} size="small">
+        <InputLabel className="filter-title" id="experience">
+          Min Experience
+        </InputLabel>
         <Select
           labelId="experience"
           id="experienceId"
@@ -122,7 +142,10 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           }}
           endAdornment={
             <IconButton>
-              <ClearIcon onClick={() => setSearchTerm("")} />
+              <ClearIcon
+                className="clear-icon"
+                onClick={() => setSearchTerm("")}
+              />
             </IconButton>
           }
         >
@@ -131,8 +154,10 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           <MenuItem value="3">3</MenuItem>
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
-        <InputLabel id="remote">Remote</InputLabel>
+      <FormControl sx={{ m: 2, width: 200 }} size="small">
+        <InputLabel className="filter-title" id="remote">
+          Remote
+        </InputLabel>
         <Select
           labelId="remote"
           id="remoteId"
@@ -143,7 +168,10 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           }}
           endAdornment={
             <IconButton>
-              <ClearIcon onClick={() => setSearchTerm("")} />
+              <ClearIcon
+                className="clear-icon"
+                onClick={() => setSearchTerm("")}
+              />
             </IconButton>
           }
         >
@@ -152,8 +180,10 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           <MenuItem value="hybrid">Hybrid</MenuItem>
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
-        <InputLabel id="basePay">Minimum Base Pay Salary</InputLabel>
+      <FormControl sx={{ m: 2, width: 205 }} size="small">
+        <InputLabel className="filter-title" id="basePay">
+          Minimum Base Pay Salary
+        </InputLabel>
         <Select
           labelId="basePay"
           id="basePayId"
@@ -164,22 +194,29 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
           }}
           endAdornment={
             <IconButton>
-              <ClearIcon onClick={() => setSearchTerm("")} />
+              <ClearIcon
+                className="clear-icon"
+                onClick={() => setSearchTerm("")}
+              />
             </IconButton>
           }
         >
-          {basePayItems &&
+          {/* {basePayItems &&
             basePayItems.map((name) => (
               <MenuItem value={name}>{name} USD</MenuItem>
-            ))}
-          {/* <MenuItem value="">0L</MenuItem>
-          <MenuItem value="">10L</MenuItem>
-          <MenuItem value="">20L</MenuItem> */}
+            ))} */}
+          <MenuItem value="0">0L</MenuItem>
+          <MenuItem value="10">10L</MenuItem>
+          <MenuItem value="20">20L</MenuItem>
+          <MenuItem value="30">30L</MenuItem>
+          <MenuItem value="40">40L</MenuItem>
+          <MenuItem value="50">50L</MenuItem>
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 300 }}>
+      <FormControl sx={{ mb: 1, ml: 2, width: 200 }}>
         <TextField
-          className="text-field"
+          size="small"
+          className="search-company"
           placeholder="Search Company Name"
           onChange={(event) => {
             setSearchTerm(event.target.value);
@@ -191,48 +228,3 @@ function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
 }
 
 export default SearchFilter;
-
-// {
-/* <div className="card">
-  <div className="card-logo">
-    <img src="#" />
-  </div>
-  <div>
-    <div className="card-info-container">
-      <h3 className="MuiBox-root css-rulwqv">Homework App</h3>
-      <h2>Jr Fullstack</h2>
-    </div>
-    <p className="card-subtext">India</p>
-  </div>
-  <p className="card-salary">
-    Estimated Salary: ₹15 - 20 LPA ✅
-    <br />
-  </p>
-  
-  
-  <div className="card-body">
-    <p className="about-company">About Company</p>
-    <p>
-      <strong>About us</strong>
-    </p>
-    <p>
-      This is a sample job and you must have displayed it to understand
-      that its not just some random lorem ipsum text but something which
-      was manually written. Oh well, if random text is what you were
-      looking for then here it is: Lorem Ipsum is simply dummy text of the
-      printing and typesetting industry. Lorem Ipsum has been the
-      industry's standard dummy text ever since the 1500s, when an unknown
-      printer took a galley of type and scrambled it to make a type
-      specimen book. It has survived not only five centuries, but also the
-      leap into electronic typesetting, remaining essentially unchanged.
-      It was popularised in the 1960s with the release of Letraset sheets
-      containing Lorem Ipsum passages and now in this assignment
-    </p>
-  </div>
-  <div className="experience">
-    <h3>Minimum Experience</h3>
-    <h3>1 years</h3>
-  </div>
-  <button>⚡ Easy Apply</button>
-  </div> */
-//   }

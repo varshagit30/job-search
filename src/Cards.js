@@ -1,4 +1,4 @@
-import React, { isValidElement, useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./index.css";
 import {
   Card,
@@ -16,6 +16,8 @@ import SearchFilter from "./SearchFilter";
 const Cards = ({ data }) => {
   console.log("cards data", data.jdList);
   // const [filteredData, setFilteredData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
   const [searchTerm, setSearchTerm] = useState("");
 
   // const handleFilter = (e) => {
@@ -46,7 +48,7 @@ const Cards = ({ data }) => {
 
       {data.jdList &&
         data.jdList
-          .filter((val) => {
+          .filter((val, index) => {
             if (searchTerm === "") {
               return val;
             } else if (
@@ -73,7 +75,10 @@ const Cards = ({ data }) => {
                       }
                       title={
                         <>
-                          <a href={items.jdLink}> {items.companyName}</a>
+                          <a className="company-name" href={items.jdLink}>
+                            {" "}
+                            {items.companyName}
+                          </a>
                         </>
                       }
                       subheader={
@@ -94,21 +99,34 @@ const Cards = ({ data }) => {
                         About Company:
                       </Typography>
                       <Typography className="about-us">About us</Typography>
-                      <Typography className="job-details">
+                      <Typography
+                        className={isOpen ? "experience" : "job-details"}
+                      >
                         {items.jobDetailsFromCompany}
                       </Typography>
+                      <Button
+                        id={index}
+                        className="read-more"
+                        onClick={(event) => {
+                          if (event.target.id) {
+                            setIsOpen(!isOpen);
+                          }
+                          // console.log("target", event.target.id, index);
+                        }}
+                      >
+                        {isOpen ? "Read Less" : " View Job"}
+                      </Button>
                       <br />
                       <Typography className="card-salary">
                         Minimun experience
                       </Typography>
-                      <Typography className="job-details">
+                      <Typography className="experience">
                         {items.minExp} years
                       </Typography>
                       <br />
                       <Link
                         component="button"
                         className="card-button"
-                        variant="body2"
                         underline="none"
                         href={items.jdLink}
                       >
