@@ -12,17 +12,11 @@ img, svg {
   width: 100% !important;
   color: rgb(0, 0, 0) !important;
   font-weight: 700 !important;
-  padding: 8px 18px !important;
+  padding: 6px 18px !important;
   border-color:  rgb(85, 239, 196) ;
   border-radius: 8px !important;
   text-transform: none !important;
-  margin: 5px 0 !important;
-}
-
-.Grid{
-  padding-top: 20px;
-  padding-left: 50px;
-  padding-right: 50px;
+  margin-right: 5px 0 !important;
 }
 
 .card{
@@ -42,14 +36,11 @@ img, svg {
 }
 
 .card-post{
-  display: flex !important;
-  align-items: flex-start;
+  width: max-content;
   padding: 4px 6px;
   border-radius: 10px !important;
-  flex-wrap: wrap;
-  gap: 5px;
-  /* width: 100%;  */
-  flex: 1 1 0%;
+  border: 1px solid;
+  border-color: #a19f9f;
   margin: 10px;
   font-weight: 400;
   line-height: 1.5;
@@ -62,11 +53,11 @@ img, svg {
   height: 2.5rem;
 }
 
-.card-body{
+/* .card-body{
  width: 100%;
-}
+} */
 
-.card-info-container >a{
+/* .card-info-container >a{
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -78,7 +69,7 @@ img, svg {
   font-size: 14px;
   line-height: 1.5;
   justify-content: left;
-}
+} */
 
  .card-subtext {
   font-size: 11px;
@@ -87,7 +78,9 @@ img, svg {
 }
 
 .card-salary{
-  font-weight: 400;
+  font-size: 14px !important;
+  font-weight: 500;
+  color: #8b8b8b;
 }
 
  .about-company{
@@ -95,6 +88,15 @@ img, svg {
   font-size: 1rem;
   line-height: 1.5;
   font-weight: 500;
+}
+
+.about-us{
+  font-weight: bold !important;
+}
+
+.job-details{
+  font-size: 14px !important;
+  line-height: 1.5 !important;
 }
 
  .experience{

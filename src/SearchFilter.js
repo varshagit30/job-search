@@ -36,12 +36,15 @@ const getStyles = (name, personName, theme) => {
         : theme.typography.fontWeightMedium,
   };
 };
+const names = ["Oliver Hansen", "Van Henry", "April Tucker", "Ralph Hubbard"];
 
-function SearchFilter({ data, searchTerm, setSearchTerm }) {
+function SearchFilter({ data, searchTerm, setSearchTerm, newData }) {
   const theme = useTheme();
-  const names = data.jdList;
-  console.log("names", names);
 
+  const menuItems = [...new Set(newData && newData.map((val) => val.location))];
+  const basePayItems = [
+    ...new Set(newData && newData.map((val) => val.minJdSalary)),
+  ];
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -82,7 +85,7 @@ function SearchFilter({ data, searchTerm, setSearchTerm }) {
                 value={name}
                 style={getStyles(name, personName, theme)}
               >
-                {name.jobRole}
+                {name}
               </MenuItem>
             ))}
         </Select>
@@ -103,15 +106,8 @@ function SearchFilter({ data, searchTerm, setSearchTerm }) {
             </IconButton>
           }
         >
-          {names &&
-            names.map((name) => (
-              <MenuItem value={name.location} key={name.jdUid}>
-                {name.location}
-              </MenuItem>
-              // <MenuItem value="mumbai">Mumbai</MenuItem>
-              // <MenuItem value="bangalore">Bangalore</MenuItem>
-              // <MenuItem value="chennai">Chennai</MenuItem>
-            ))}
+          {menuItems &&
+            menuItems.map((name) => <MenuItem value={name}>{name}</MenuItem>)}
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
@@ -140,13 +136,20 @@ function SearchFilter({ data, searchTerm, setSearchTerm }) {
         <Select
           labelId="remote"
           id="remoteId"
-          // value={age}
           label="Remote"
-          onChange={handleChange}
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+          endAdornment={
+            <IconButton>
+              <ClearIcon onClick={() => setSearchTerm("")} />
+            </IconButton>
+          }
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value="remote">Remote</MenuItem>
+          <MenuItem value="in-office">In-Office</MenuItem>
+          <MenuItem value="hybrid">Hybrid</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
@@ -154,13 +157,24 @@ function SearchFilter({ data, searchTerm, setSearchTerm }) {
         <Select
           labelId="basePay"
           id="basePayId"
-          // value={age}
           label="Minimum Base Pay Salary"
-          onChange={handleChange}
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+          endAdornment={
+            <IconButton>
+              <ClearIcon onClick={() => setSearchTerm("")} />
+            </IconButton>
+          }
         >
-          <MenuItem value={10}>0L</MenuItem>
-          <MenuItem value={20}>10L</MenuItem>
-          <MenuItem value={30}>20L</MenuItem>
+          {basePayItems &&
+            basePayItems.map((name) => (
+              <MenuItem value={name}>{name} USD</MenuItem>
+            ))}
+          {/* <MenuItem value="">0L</MenuItem>
+          <MenuItem value="">10L</MenuItem>
+          <MenuItem value="">20L</MenuItem> */}
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }}>

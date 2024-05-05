@@ -8,8 +8,8 @@ import {
   CardContent,
   Typography,
   Button,
-  FormControl,
-  TextField,
+  Link,
+  Box,
 } from "@mui/material";
 import SearchFilter from "./SearchFilter";
 
@@ -17,8 +17,6 @@ const Cards = ({ data }) => {
   console.log("cards data", data.jdList);
   // const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
-  // const
 
   // const handleFilter = (e) => {
   //   const getSearch = e.target.value;
@@ -32,6 +30,10 @@ const Cards = ({ data }) => {
   //     console.log("updData", getSearch);
   //   }
   // };
+  // const jsonData = JSON.stringify(data.jdList);
+  // console.log("jsonData", jsonData);
+  const newData = data.jdList;
+  const minExpItems = [...new Set(newData && newData.map((val) => val.minExp))];
 
   return (
     <>
@@ -39,6 +41,7 @@ const Cards = ({ data }) => {
         data={data}
         setSearchTerm={setSearchTerm}
         searchTerm={searchTerm}
+        newData={newData}
       />
 
       {data.jdList &&
@@ -57,37 +60,64 @@ const Cards = ({ data }) => {
           })
           .map((items, index) => {
             return (
-              <div>
-                {console.log("itemsssss", items.minExp)}
-                <Card className="card" key={items.jdUid}>
-                  <Card className="card-post">⏳Posted 4 days ago</Card>
-                  <CardMedia image={items.logoUrl} className="card-logo" />
-                  <CardContent>
-                    <Typography className="card-info-container">
-                      <a href={items.jdLink}> {items.companyName}</a>
-                      <h2>{items.jobRole}</h2>
-                    </Typography>
-                    <p className="card-subtext">{items.location}</p>
-                    <p className="card-salary">
-                      Estimated Salary: {items.minJdSalary} -{items.maxJdSalary}{" "}
-                      {items.salaryCurrencyCode} ✅
+              <>
+                <Grid xs={4}>
+                  <Card className="card" key={items.jdUid}>
+                    <Box className="card-post">⏳Posted 4 days ago</Box>
+                    <CardHeader
+                      avatar={
+                        <CardMedia
+                          image={items.logoUrl}
+                          className="card-logo"
+                        />
+                      }
+                      title={
+                        <>
+                          <a href={items.jdLink}> {items.companyName}</a>
+                        </>
+                      }
+                      subheader={
+                        <>
+                          {items.jobRole}
+                          <br />
+                          {items.location}
+                        </>
+                      }
+                    />
+                    <CardContent>
+                      <Typography className="card-salary">
+                        Estimated Salary: {items.minJdSalary} -
+                        {items.maxJdSalary} {items.salaryCurrencyCode} ✅
+                      </Typography>
                       <br />
-                    </p>
-                    <Typography className="card-body">
-                      <p className="about-company">About Company</p>
-                      <p>
-                        <strong>About us</strong>
-                      </p>
-                      <p>{items.jobDetailsFromCompany}</p>
-                    </Typography>
-                    <Typography className="card-info-container">
-                      <h3>Minimun experience</h3>
-                      <h2>{items.minExp}</h2>
-                    </Typography>
-                    <Button className="card-button">⚡ Easy Apply</Button>
-                  </CardContent>
-                </Card>
-              </div>
+                      <Typography className="about-company">
+                        About Company:
+                      </Typography>
+                      <Typography className="about-us">About us</Typography>
+                      <Typography className="job-details">
+                        {items.jobDetailsFromCompany}
+                      </Typography>
+                      <br />
+                      <Typography className="card-salary">
+                        Minimun experience
+                      </Typography>
+                      <Typography className="job-details">
+                        {items.minExp} years
+                      </Typography>
+                      <br />
+                      <Link
+                        component="button"
+                        className="card-button"
+                        variant="body2"
+                        underline="none"
+                        href={items.jdLink}
+                      >
+                        <Button href={items.jdLink}>⚡ Easy Apply</Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </>
             );
           })}
     </>
