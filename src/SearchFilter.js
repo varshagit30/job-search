@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Select,
   MenuItem,
@@ -11,8 +11,10 @@ import {
   Autocomplete,
   Stack,
   Input,
-  TextField
+  TextField,
+  IconButton,
 } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 import "./index.css";
 
 const ITEM_HEIGHT = 48;
@@ -26,8 +28,6 @@ const MenuProps = {
   },
 };
 
-const names = ["Oliver Hansen", "Van Henry", "April Tucker", "Ralph Hubbard"];
-
 const getStyles = (name, personName, theme) => {
   return {
     fontWeight:
@@ -37,8 +37,11 @@ const getStyles = (name, personName, theme) => {
   };
 };
 
-function SearchFilter() {
+function SearchFilter({ data, searchTerm, setSearchTerm }) {
   const theme = useTheme();
+  const names = data.jdList;
+  console.log("names", names);
+
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -72,45 +75,64 @@ function SearchFilter() {
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
+          {names &&
+            names.map((name) => (
+              <MenuItem
+                key={name}
+                value={name}
+                style={getStyles(name, personName, theme)}
+              >
+                {name.jobRole}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
-        <InputLabel id="demo-simple-select-label">
-          Number of Employees
-        </InputLabel>
+        <InputLabel id="location">Location</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          // value={age}
-          label="Number of Employees"
-          onChange={handleChange}
+          labelId="location"
+          id="locationId"
+          label="Location"
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+          endAdornment={
+            <IconButton>
+              <ClearIcon onClick={() => setSearchTerm("")} />
+            </IconButton>
+          }
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {names &&
+            names.map((name) => (
+              <MenuItem value={name.location} key={name.jdUid}>
+                {name.location}
+              </MenuItem>
+              // <MenuItem value="mumbai">Mumbai</MenuItem>
+              // <MenuItem value="bangalore">Bangalore</MenuItem>
+              // <MenuItem value="chennai">Chennai</MenuItem>
+            ))}
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
-        <InputLabel id="experience">Experience</InputLabel>
+        <InputLabel id="experience">Min Experience</InputLabel>
         <Select
           labelId="experience"
           id="experienceId"
-          // value={age}
           label="Experience"
-          onChange={handleChange}
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+          endAdornment={
+            <IconButton>
+              <ClearIcon onClick={() => setSearchTerm("")} />
+            </IconButton>
+          }
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value="1">1</MenuItem>
+          <MenuItem value="2">2</MenuItem>
+          <MenuItem value="3">3</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
@@ -136,13 +158,19 @@ function SearchFilter() {
           label="Minimum Base Pay Salary"
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={10}>0L</MenuItem>
+          <MenuItem value={20}>10L</MenuItem>
+          <MenuItem value={30}>20L</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, minWidth: 300 }}>
-        <TextField className="text-field" placeholder="Search Company Name"></TextField>
+        <TextField
+          className="text-field"
+          placeholder="Search Company Name"
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+        ></TextField>
       </FormControl>
     </div>
   );

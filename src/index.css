@@ -26,18 +26,37 @@ img, svg {
 }
 
 .card{
+  display: flex;
+  flex-flow: wrap;
   width: 20rem;
   border-radius: 2rem !important;
   box-shadow: 0px 10px 8px #999;
-  display: flex;
   flex-direction: column;
-  margin: 0.5rem;
+  /* margin: 0.5rem; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8px;
   background-color: white;
   height: fit-content;
   padding: 8px 16px;
 }
 
-.card-logo{
+.card-post{
+  display: flex !important;
+  align-items: flex-start;
+  padding: 4px 6px;
+  border-radius: 10px !important;
+  flex-wrap: wrap;
+  gap: 5px;
+  /* width: 100%;  */
+  flex: 1 1 0%;
+  margin: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 9px;
+}
+
+ .card-logo{
   justify-content: left;
   width: 25px;
   height: 2.5rem;

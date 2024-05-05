@@ -14,7 +14,6 @@ function CardList({ fetchData, data, state, loading, error }) {
   console.log("fetch data", data);
   return (
     <Container>
-      <SearchFilter />
       <Grid container spacing={3} className="Grid">
         {/* <Grid> */}
         <Cards data={data} />
