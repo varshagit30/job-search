@@ -1,9 +1,13 @@
-import axios from "axios";
-
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
 export const SET_FILTER = "SET_FILTER";
 export const CLEAR_FILTER = "CLEAR_FILTER";
+export const SET_MULTIPLE_FILTER = "SET_MULTIPLE_FILTER";
+
+export const setMultipleFilter = (multiplefilter) => ({
+  type: SET_MULTIPLE_FILTER,
+  multiplefilter,
+});
 
 export const setFilter = (filter) => ({
   type: SET_FILTER,
@@ -30,7 +34,6 @@ export const fetchData = () => {
       body,
     };
 
-    //   fetch placeholder data from jsonplaceholder
     fetch(
       "https://api.weekday.technology/adhoc/getSampleJdJSON",
       requestOptions

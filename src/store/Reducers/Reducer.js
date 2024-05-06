@@ -3,6 +3,7 @@ import {
   FETCH_DATA_FAILURE,
   SET_FILTER,
   CLEAR_FILTER,
+  SET_MULTIPLE_FILTER,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   loading: false,
   error: null,
   filter: "",
+  multiplefilter: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +37,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filter: "",
+      };
+      case SET_MULTIPLE_FILTER:
+      return {
+        ...state,
+        multiplefilter: action.multiplefilter,
       };
 
     default:

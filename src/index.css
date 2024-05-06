@@ -34,7 +34,6 @@ img, svg {
   padding: 6px 18px !important;
   border-radius: 8px !important;
   text-transform: none !important;
-  /* margin-top: 5px 0 !important; */
 }
 
 .card-post{
@@ -55,10 +54,6 @@ img, svg {
   height: 2.5rem;
 }
 
-/* .card-body{
- width: 100%;
-} */
-
 .company-name{
   font-size: 13px;
   font-weight: 600;
@@ -67,18 +62,6 @@ img, svg {
   color: #8b8b8b;
   text-decoration: none;
 }
-
-/* .card-info-container >h2 {
-  font-size: 14px;
-  line-height: 1.5;
-  justify-content: left;
-} */
-
- /* .card-subtext {
-  font-size: 11px;
-  font-weight: 500;
-  margin-top: 5px;
-} */
 
 .card-salary{
   font-size: 14px !important;
@@ -127,6 +110,11 @@ img, svg {
 .search-company{
   font-size: 13px !important;
   height: 36px !important;  
+}
+
+.role-chips{
+  height: 20px !important;
+  font-size: 10px !important;
 }
 
 

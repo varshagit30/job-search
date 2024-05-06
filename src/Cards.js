@@ -21,13 +21,13 @@ const Cards = ({
   filteredData,
   handleFilterChange,
   handleClearFilter,
+  multiplefilter,
+  setMultipleFilter,
+  handleMultipleFilterChange,
 }) => {
-  console.log("cards data", data.jdList);
   const [isOpen, setIsOpen] = useState(false);
 
   const newData = data.jdList;
-  const minExpItems = [...new Set(newData && newData.map((val) => val.minExp))];
-  console.log("filteredData", filteredData);
 
   return (
     <>
@@ -39,7 +39,11 @@ const Cards = ({
         clearFilter={clearFilter}
         handleFilterChange={handleFilterChange}
         handleClearFilter={handleClearFilter}
+        multiplefilter={multiplefilter}
+        setMultipleFilter={setMultipleFilter}
+        handleMultipleFilterChange={handleMultipleFilterChange}
       />
+
       {filteredData &&
         filteredData.map((card, index) => {
           return (
@@ -87,12 +91,12 @@ const Cards = ({
                       {card.jobDetailsFromCompany}
                     </Typography>
                     <Button
+                      id={index}
                       className="read-more"
                       onClick={(event) => {
                         if (event.target.id) {
                           setIsOpen(!isOpen);
                         }
-                        // console.log("target", event.target.id, index);
                       }}
                     >
                       {isOpen ? "Read Less" : " View Job"}

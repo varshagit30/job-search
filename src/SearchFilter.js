@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Select,
   MenuItem,
   OutlinedInput,
   Chip,
   FormControl,
-  useTheme,
   InputLabel,
   Box,
-  Autocomplete,
-  Stack,
-  Input,
   TextField,
   IconButton,
 } from "@mui/material";
@@ -28,43 +24,23 @@ const MenuProps = {
   },
 };
 
-const getStyles = (name, personName, theme) => {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-};
-const names = ["Oliver Hansen", "Van Henry", "April Tucker", "Ralph Hubbard"];
-
 function SearchFilter({
-  data,
   filter,
   newData,
   handleFilterChange,
   handleClearFilter,
+  multiplefilter,
+  setMultipleFilter,
+  handleMultipleFilterChange,
 }) {
-  const theme = useTheme();
-
+  const jobRoles = [...new Set(newData && newData.map((val) => val.jobRole))];
   const menuItems = [...new Set(newData && newData.map((val) => val.location))];
-  const basePayItems = [
-    ...new Set(newData && newData.map((val) => val.minJdSalary)),
-  ];
-  const [personName, setPersonName] = React.useState([]);
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
-  };
-
-  console.log("filter", filter);
+  const names = jobRoles;
 
   return (
     <div>
-      <FormControl sx={{ m: 2, width: 200 }} size="small">
+      <FormControl sx={{ m: 2, width: 180 }} size="small">
         <InputLabel className="filter-title" id="roles">
           Roles
         </InputLabel>
@@ -74,40 +50,39 @@ function SearchFilter({
           label="Roles"
           id="roleId"
           multiple
-          // value={filter}
           endAdornment={
             <IconButton>
               <ClearIcon
                 className="clear-icon"
-                onClick={() => setPersonName("")}
+                onClick={() => setMultipleFilter([])}
               />
             </IconButton>
           }
-          value={personName}
-          onChange={handleChange}
+          value={multiplefilter}
+          onChange={handleMultipleFilterChange}
           input={<OutlinedInput id="select-multiple-chip" label="Roles" />}
           renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
+            <>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                {selected.map((value) => (
+                  <>
+                    <Chip className="role-chips" key={value} label={value} />
+                  </>
+                ))}
+              </Box>
+            </>
           )}
           MenuProps={MenuProps}
         >
           {names &&
-            names.map((name) => (
-              <MenuItem
-                key={name}
-                value={name}
-                style={getStyles(name, personName, theme)}
-              >
+            names.map((name, personName) => (
+              <MenuItem key={name} value={name}>
                 {name}
               </MenuItem>
             ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 2, width: 200 }} size="small">
+      <FormControl sx={{ m: 2, width: 180 }} size="small">
         <InputLabel className="filter-title" id="location">
           Location
         </InputLabel>
@@ -128,7 +103,7 @@ function SearchFilter({
             menuItems.map((name) => <MenuItem value={name}>{name}</MenuItem>)}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 2, width: 200 }} size="small">
+      <FormControl sx={{ m: 2, width: 180 }} size="small">
         <InputLabel className="filter-title" id="experience">
           Min Experience
         </InputLabel>
@@ -154,7 +129,7 @@ function SearchFilter({
           <MenuItem value="8">8</MenuItem>
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 2, width: 200 }} size="small">
+      <FormControl sx={{ m: 2, width: 180 }} size="small">
         <InputLabel className="filter-title" id="remote">
           Remote
         </InputLabel>
@@ -175,9 +150,9 @@ function SearchFilter({
           <MenuItem value="hybrid">Hybrid</MenuItem>
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 2, width: 205 }} size="small">
+      <FormControl sx={{ m: 2, width: 210 }} size="small">
         <InputLabel className="filter-title" id="basePay">
-          Minimum Base Pay Salary
+          Min Base Pay Salary
         </InputLabel>
         <Select
           labelId="basePay"
